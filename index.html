@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Растения для гостиной и кухни-гостиной — TopPlant</title>
+  <style>
+    :root { --ink:#20342d; --muted:#6b7c74; --line:#dfe8e2; --accent:#26745a; --soft:#f2f7f3; --cream:#fffdf8; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--cream); font:16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    a { color:var(--accent); }
+    .wrap { max-width:1240px; margin:0 auto; padding:0 24px; }
+    header { padding:56px 0 34px; background:linear-gradient(135deg,#e7f3eb 0%,#fbf8ed 72%); border-bottom:1px solid var(--line); }
+    .eyebrow { text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-weight:750; color:var(--accent); }
+    h1 { margin:10px 0 12px; max-width:850px; font-size:clamp(34px,5vw,64px); line-height:1.04; letter-spacing:-.04em; }
+    .lead { max-width:780px; color:#486057; font-size:18px; margin:0; }
+    .meta { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+    .pill { border:1px solid #cbdacf; background:#ffffffb8; border-radius:999px; padding:7px 13px; font-size:13px; color:#426356; }
+    nav { position:sticky; top:0; z-index:5; background:#fffdf8e8; backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+    nav .wrap { display:flex; align-items:center; gap:18px; overflow:auto; padding-top:12px; padding-bottom:12px; }
+    nav a { white-space:nowrap; text-decoration:none; font-size:14px; font-weight:700; }
+    .tools { display:flex; gap:12px; align-items:center; justify-content:space-between; padding:28px 0 6px; }
+    .tools h2 { margin:0; font-size:22px; }
+    .filters { margin:12px 0 8px; padding:16px; border:1px solid var(--line); border-radius:16px; background:#fff; }
+    .filter-row { display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:11px; }
+    .filter-row:last-child { margin-bottom:0; }
+    .filter-label { min-width:118px; color:var(--muted); font-size:13px; font-weight:750; }
+    .filter-btn, .reset-btn { border:1px solid #cbdacf; background:#f8fbf8; color:#426356; border-radius:999px; padding:7px 12px; font:inherit; font-size:13px; cursor:pointer; transition:.15s ease; }
+    .filter-btn:hover, .reset-btn:hover { border-color:var(--accent); color:var(--accent); }
+    .filter-btn.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+    .reset-btn { margin-left:auto; background:#fff; }
+    .filter-hint { margin:12px 0 0; color:var(--muted); font-size:12px; }
+    .filter-status { margin:14px 0 4px; color:var(--muted); font-size:13px; }
+    input { width:min(360px,100%); border:1px solid var(--line); border-radius:12px; padding:11px 14px; background:white; color:var(--ink); font:inherit; }
+    section { padding:30px 0 8px; scroll-margin-top:64px; }
+    .section-head { display:flex; align-items:end; justify-content:space-between; gap:18px; margin-bottom:18px; }
+    .section-head h2 { margin:0; font-size:30px; letter-spacing:-.025em; }
+    .section-head p { margin:0; color:var(--muted); font-size:14px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:18px; }
+    .card { background:white; border:1px solid var(--line); border-radius:18px; overflow:hidden; box-shadow:0 8px 26px #315b4410; display:flex; flex-direction:column; }
+    .gallery { background:#edf4ef; aspect-ratio:1.16/1; display:grid; grid-template-columns:1fr; position:relative; }
+    .gallery .main { width:100%; height:100%; object-fit:cover; display:block; }
+    .thumbs { position:absolute; left:12px; right:12px; bottom:12px; display:flex; gap:7px; overflow:auto; }
+    .thumbs button { padding:0; border:2px solid #fff; border-radius:8px; overflow:hidden; width:48px; height:48px; flex:0 0 48px; background:#fff; cursor:pointer; box-shadow:0 2px 8px #0002; }
+    .thumbs button.active { border-color:var(--accent); }
+    .thumbs img { width:100%; height:100%; object-fit:cover; display:block; }
+    .card-body { padding:19px 19px 20px; display:flex; flex-direction:column; gap:13px; flex:1; }
+    .card h3 { margin:0; font-size:20px; line-height:1.18; letter-spacing:-.02em; }
+    .card h3 a { color:var(--ink); text-decoration:none; }
+    .card h3 a:hover { color:var(--accent); }
+    .tags { display:flex; flex-wrap:wrap; gap:6px; }
+    .tag { display:inline-flex; border-radius:999px; padding:4px 8px; background:#edf6f0; color:#4b6e5c; font-size:11px; font-weight:750; }
+    .price { font-size:20px; font-weight:800; color:var(--accent); }
+    .body-grid { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(170px,.9fr); gap:17px; align-items:start; }
+    .description { color:#4e6259; font-size:14px; line-height:1.55; white-space:pre-line; }
+    .description p { margin:0 0 9px; }
+    .description p:last-child { margin-bottom:0; }
+    .specs { border-left:1px solid var(--line); padding-left:16px; }
+    .spec { padding:0 0 9px; }
+    .spec dt { color:var(--muted); font-size:12px; }
+    .spec dd { margin:1px 0 0; font-weight:700; font-size:14px; }
+    .source { display:inline-flex; align-items:center; gap:6px; width:max-content; font-size:13px; font-weight:750; text-decoration:none; border-bottom:1px solid #acd0be; }
+    .note { margin:36px 0 52px; border:1px solid #d7e6dc; border-radius:16px; background:var(--soft); padding:18px 20px; color:#496258; font-size:14px; }
+    footer { border-top:1px solid var(--line); padding:26px 0 44px; color:var(--muted); font-size:13px; }
+    .empty { display:none; color:var(--muted); padding:18px 0; }
+    @media (max-width:780px) { .wrap{padding:0 16px;} header{padding:38px 0 28px;} .tools{display:block;} .tools input{margin-top:12px;} .filter-label{min-width:100%;} .reset-btn{margin-left:0;} .body-grid{grid-template-columns:1fr;} .specs{border-left:0;border-top:1px solid var(--line);padding:14px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:8px;} .spec{padding:0;} }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">Подборка TopPlant · 28 сентября 2026</div>
+      <h1>Растения для гостиной и кухни-гостиной</h1>
+      <p class="lead">Каталог крупномерных растений, «шариков» и кустовых форм с фотографиями, параметрами, ценами и описаниями из карточек TopPlant.</p>
+      <div class="meta"><span class="pill">23 позиции</span><span class="pill">Гостиная · 19</span><span class="pill">Кухня-гостиная · 4</span><span class="pill">Фото загружаются с topplant.ru</span></div>
+    </div>
+  </header>
+  <nav><div class="wrap"><a href="#living">Гостиная</a><a href="#balls">Шарики</a><a href="#bushes">Листья-кусты</a><a href="#kitchen">Кухня-гостиная</a></div></nav>
+  <main class="wrap">
+    <div class="tools"><h2>Все позиции</h2><input id="search" type="search" placeholder="Поиск по растениям…" aria-label="Поиск по растениям"></div>
+    <div class="filters" aria-label="Фильтры каталога">
+      <div class="filter-row" data-filter-row="zone"><span class="filter-label">Зона</span><button class="filter-btn active" data-filter-group="zone" data-value="all" type="button">Все</button><button class="filter-btn" data-filter-group="zone" data-value="living" type="button">Гостиная</button><button class="filter-btn" data-filter-group="zone" data-value="kitchen" type="button">Кухня-гостиная</button></div>
+      <div class="filter-row" data-filter-row="form"><span class="filter-label">Форма</span><button class="filter-btn active" data-filter-group="form" data-value="all" type="button">Все</button><button class="filter-btn" data-filter-group="form" data-value="ball" type="button">Шарики / штамбы</button><button class="filter-btn" data-filter-group="form" data-value="bush" type="button">Кусты</button></div>
+      <div class="filter-row" data-filter-row="type"><span class="filter-label">Тип растения</span><button class="filter-btn active" data-filter-group="type" data-value="all" type="button">Все</button><button class="filter-btn" data-filter-group="type" data-value="radermachera" type="button">Радермахера</button><button class="filter-btn" data-filter-group="type" data-value="ficus" type="button">Фикусы</button><button class="filter-btn" data-filter-group="type" data-value="schefflera" type="button">Шеффлеры</button><button class="filter-btn" data-filter-group="type" data-value="croton" type="button">Кротон / кодиеум</button><button class="filter-btn" data-filter-group="type" data-value="strelitzia" type="button">Стрелиция</button><button class="filter-btn" data-filter-group="type" data-value="spathiphyllum" type="button">Спатифиллум</button><button class="filter-btn" data-filter-group="type" data-value="dracaena" type="button">Драцена</button><button class="filter-btn" data-filter-group="type" data-value="zamioculcas" type="button">Замиокулькас</button><button class="filter-btn" data-filter-group="type" data-value="laurel" type="button">Лавр</button></div>
+      <p class="filter-hint">Внутри одной строки можно выбрать несколько вариантов. Между строками действует логика «И»: например, «Кухня-гостиная» + «Шарики / штамбы» + «Фикусы».</p>
+      <div id="filter-status" class="filter-status"></div>
+      <button id="reset-filters" class="reset-btn" type="button">Сбросить фильтры</button>
+    </div>
+    <section id="living"><div class="section-head"><h2>Гостиная</h2><p>19 вариантов для основной зоны</p></div><div id="living-grid" class="grid"></div></section>
+    <section id="kitchen"><div class="section-head"><h2>Кухня-гостиная</h2><p>4 акцентных растения</p></div><div id="kitchen-grid" class="grid"></div></section>
+    <div id="empty" class="empty">Ничего не найдено. Попробуйте изменить запрос.</div>
+    <div class="note"><strong>Важно:</strong> цены и наличие на сайте могут меняться. Высота указана TopPlant с учётом технического горшка; перед заказом магазин рекомендует уточнить актуальную стоимость и попросить фото конкретного экземпляра.</div>
+  </main>
+  <footer><div class="wrap">Источник названий, фотографий, параметров и описаний: <a href="https://topplant.ru" target="_blank" rel="noopener">TopPlant.ru</a>. Открывайте ссылку в названии карточки для актуальной информации.</div></footer>
+  <script>
+    const items = [
+      {group:'living', title:'Радермахера штамб D:28см H:150см', url:'https://topplant.ru/komnatnyie-rasteniya/dekorativno-listvennyie/radermaxera/radermaxera-shtamb-d28sm-h150sm', price:'25 000 ₽', img:'https://topplant.ru/assets/images/products/4745/radermakhera-shtamb-28-150-2.jpg', more:['https://topplant.ru/assets/images/products/4745/radermakhera-shtamb-28-150-1.jpg','https://topplant.ru/assets/images/products/4745/radermakhera-shtamb-28-150-8.jpg'], specs:[['Высота','150 см'],['Диаметр горшка','28 см'],['Освещение','Яркий рассеянный свет'],['Полив','Умеренный'],['Температура','18–24 °C'],['Место произрастания','Центральная и Южная Америка']], desc:'Радермахера с пышной ажурной кроной и мелкими глянцевыми листьями создаёт ощущение живого зелёного облака. Хорошо подходит для светлого угла гостиной; любит яркий рассеянный свет, стабильную влажность и отсутствие сквозняков.'},
+      {group:'living', title:'Фикус Бенджамина Экзотика двойная спираль D:32см H:140см', url:'https://topplant.ru/komnatnyie-rasteniya/fikusyi/bendzhamina/fikus-ekzotika-dvojnaya-spiral-d32sm-h140sm', price:'26 500 ₽', img:'https://topplant.ru/assets/images/products/4719/fikus-bendzhamina-ekzotika-dv-spir-32-140-1.jpg', more:['https://topplant.ru/assets/images/products/4719/fikus-bendzhamina-ekzotika-dv-spir-32-140-6.jpg','https://topplant.ru/assets/images/products/4719/fikus-bendzhamina-ekzotika-dv-spir-32-140-5.jpg'], specs:[['Высота','140 см'],['Диаметр горшка','32 см'],['Освещение','Яркий рассеянный свет'],['Полив','Умеренный'],['Место произрастания','Юго-Восточная Азия'],['Влажность','Повышенная']], desc:'Фикус с глянцевыми зелёными листьями, густой кроной и выразительным двойным спиралевидным стволом. Очищает и увлажняет воздух; предпочитает регулярный полив, высокую влажность и защиту от прямого солнца.'},
+      {group:'living', title:'Фикус Бенджамина Экзотика спираль D:31см H:120см', url:'https://topplant.ru/komnatnyie-rasteniya/fikusyi/bendzhamina/fikus-bendzhamina-ekzotika-spiral-d31sm-h130sm', price:'21 000 ₽', img:'https://topplant.ru/assets/images/products/1525/fikus-benzhamina-ekzotika-spiral-31-140.jpg', more:[], specs:[['Высота по карточке','120 см'],['Диаметр горшка','31 см'],['Освещение','Яркий рассеянный свет'],['Полив','Регулярный'],['Место произрастания','Юго-Восточная Азия'],['Влажность','Повышенная']], desc:'Фикус Бенджамина с густой кроной и изящным спиралевидным стволом. На странице отмечены очищение воздуха, регулярный полив, рассеянный свет и необходимость периодического опрыскивания.'},
+      {group:'living', title:'Радермахера штамб D:28см H:170см', url:'https://topplant.ru/komnatnyie-rasteniya/dekorativno-listvennyie/radermaxera/radermaxera-shtamb-d28sm-h170sm', price:'24 900 ₽', img:'https://topplant.ru/assets/images/products/4517/radarmahera-shtamb-28-170-1.jpg', more:['https://topplant.ru/assets/images/products/4517/radarmahera-shtamb-28-170-2.jpg','https://topplant.ru/assets/images/products/4517/radarmahera-shtamb-28-170-3.jpg'], specs:[['Высота','170 см'],['Диаметр горшка','28 см'],['Освещение','Яркий рассеянный свет'],['Полив','Умеренный'],['Температура','18–24 °C'],['Место произрастания','Центральная и Южная Америка']], desc:'Крупная радэрмахера с воздушной изумрудной кроной. Подходит для светлого угла гостиной, любит яркий рассеянный свет, стабильную влажность и комнатную температуру 18–24 °C.'},
+      {group:'living', title:'Фикус Нитида штамб D:24см H:100см', url:'https://topplant.ru/komnatnyie-rasteniya/fikusyi/nitida/nitida-shtamb-d24sm-h100sm', price:'9 200 ₽', img:'https://topplant.ru/assets/images/products/4312/ficus-nitida-shta-24-100-1.jpg', more:['https://topplant.ru/assets/images/products/4312/ficus-nitida-shta-24-100-2.jpg','https://topplant.ru/assets/images/products/4312/ficus-nitida-shta-24-100-3.jpg'], specs:[['Высота','100 см'],['Диаметр горшка','24 см'],['Освещение','Яркий рассеянный свет'],['Полив','Регулярный'],['Температура','18–25 °C'],['Влажность','Повышенная']], desc:'Элегантный фикус с гладким серым стволом, изящными изгибами и густой кроной из кожистых тёмно-зелёных листьев. На странице отмечены очищение воздуха, регулярное опрыскивание и формирующая обрезка.'},
+      {group:'living', title:'Шеффлера Тринити переплетенная D:34см H:150см', url:'https://topplant.ru/komnatnyie-rasteniya/shefflera/shefflera-triniti-perepletennaya-d34cm-h150cm', price:'20 817 ₽', img:'https://topplant.ru/assets/images/products/750/shefflera-triniti-perepletennaya-d34cm-h150cm.jpg', more:[], specs:[['Высота','150 см'],['Диаметр горшка','34 см'],['Освещение','Яркий рассеянный свет'],['Полив','Умеренный'],['Место произрастания','Юго-Восточная Азия'],['Влажность','Повышенная']], desc:'Декоративная шеффлера с пышной кроной, пальчатыми листьями и оригинальной формой стволов. На странице описана как растение для дома и офиса, очищающее воздух; предпочитает рассеянный свет и умеренный полив.'},
+      {group:'living', title:'Шеффлера Голд Капелла разветвленная D:40см H:105см', url:'https://topplant.ru/komnatnyie-rasteniya/shefflera/shefflera-gold-kapella-razvetvlennaya-d40cm-h105cm', price:'22 302 ₽', img:'https://topplant.ru/assets/images/products/2277/shefflera-gold-kapella-razvetvlennaya-40-105.jpg', more:[], specs:[['Высота','105 см'],['Диаметр горшка','40 см'],['Освещение','Яркий рассеянный свет'],['Полив','Умеренный'],['Место произрастания','Юго-Восточная Азия'],['Влажность','Повышенная']], desc:'Разветвлённая шеффлера с глянцевыми зелёными листьями и кремово-жёлтыми пятнами. Станет ярким акцентом в гостиной; любит рассеянный свет, умеренный полив и повышенную влажность.'},
+      {group:'living', title:'Шеффлера Компакта штамб переплетенный D:45см H:170см', url:'https://topplant.ru/komnatnyie-rasteniya/shefflera/shefflera-kompakta-shtamb-perepletennyij-d45cm-h170cm', price:'46 240 ₽', img:'https://topplant.ru/assets/images/products/722/shefflera-kompakta-shtamb-perepletennyij-d45cm-h170cm.jpg', more:[], specs:[['Высота','170 см'],['Диаметр горшка','45 см'],['Освещение','Яркий рассеянный свет'],['Полив','Умеренный'],['Место произрастания','Юго-Восточная Азия'],['Влажность','Повышенная']], desc:'Высокая шеффлера Компакта с переплетённым штамбом и компактными глянцевыми листьями с кремово-белыми пятнами. Оригинальная вертикальная форма хорошо работает как солитер.'},
+      {group:'living', title:'Фикус Бенджамина Экзотика переплетенный D:34см H:150см', url:'https://topplant.ru/komnatnyie-rasteniya/fikusyi/bendzhamina/bendzhamina-ekzotika-perep-d34sm-h150sm', price:'36 200 ₽', img:'https://topplant.ru/assets/images/products/4820/fikus-bendzhamina-ekzotika-perep-34-150-1.jpg', more:['https://topplant.ru/assets/images/products/4820/fikus-bendzhamina-ekzotika-perep-34-150-8.jpg','https://topplant.ru/assets/images/products/4820/fikus-bendzhamina-ekzotika-perep-34-150-7.jpg'], specs:[['Высота','150 см'],['Диаметр горшка','34 см'],['Освещение','Яркий рассеянный свет'],['Полив','Умеренный'],['Место произрастания','Юго-Восточная Азия'],['Влажность','Повышенная']], desc:'Фикус Бенджамина с необычным переплетённым стволом и пышной зелёной кроной. Очищает и увлажняет воздух, предпочитает яркий рассеянный свет, регулярный полив и опрыскивание.'},
+      {group:'living', title:'Шеффлера Компакта D:32см H:110см', url:'https://topplant.ru/komnatnyie-rasteniya/shefflera/shefflera-kompakta-d32cm-h110cm', price:'13 600 ₽', img:'https://topplant.ru/assets/images/products/4622/sheflera-kompakta-32-110-2.jpg', more:['https://topplant.ru/assets/images/products/4622/sheflera-kompakta-32-110-1.jpg','https://topplant.ru/assets/images/products/4622/sheflera-kompakta-32-110-3.jpg'], specs:[['Высота','110 см'],['Диаметр горшка','32 см'],['Освещение','Яркий рассеянный свет'],['Полив','Умеренный'],['Место произрастания','Юго-Восточная Азия'],['Влажность','Повышенная']], desc:'Компактная шеффлера с плотными пальчатыми листьями зелёного цвета и кремово-жёлтыми пятнами. Хорошо подходит для дома и офиса; любит рассеянный свет, умеренный полив и повышенную влажность.'},
+      {group:'living', title:'Фикус Эластика Робуста 3 ствола в Lechza Classico color 28', url:'https://topplant.ru/rasteniya-v-kashpo/fikus-v-kashpo/robusta-3-stvola-v-lechza-28', price:'19 990 ₽', img:'https://topplant.ru/assets/images/products/4186/ficus-elastika-3-110-white.jpg', more:['https://topplant.ru/assets/images/products/4186/ficus-elastika-3-110-black.jpg','https://topplant.ru/assets/images/products/4186/ficus-elastika-3-110-brow.jpg'], specs:[['Высота','110 см'],['Диаметр горшка','28 см'],['Освещение','Яркий рассеянный свет'],['Полив','Редкий'],['Комплектация','Lechza Classico color 28']], desc:'Фикус Эластика Робуста с тремя стволами в кашпо Lechza. На странице TopPlant отдельное текстовое описание не заполнено; основные данные и фотографии представлены в карточке товара.'},
+      {group:'living', title:'Кротон Миссис Айстон разветвленный D:30см H:140см', url:'https://topplant.ru/komnatnyie-rasteniya/kodieum/kroton-ajston-d30sm-h140', price:'25 000 ₽', img:'https://topplant.ru/assets/images/products/4519/kroton-miss-aiston-27-140-1.jpg', more:['https://topplant.ru/assets/images/products/4519/kroton-miss-aiston-27-140-3.jpg','https://topplant.ru/assets/images/products/4519/kroton-miss-aiston-27-140-4.jpg'], specs:[['Высота','140 см'],['Диаметр горшка','30 см'],['Освещение','Яркий свет'],['Полив','Обильный'],['Место произрастания','Юго-Восточная Азия'],['Влажность','Повышенная']], desc:'Яркий кодиеум Миссис Айстон с листьями в оттенках зелёного, жёлтого, оранжевого и красного. Формирует выразительный куст, любит яркий свет, обильный полив и регулярное опрыскивание.'},
+      {group:'living', title:'Стрелиция Николая D:32см H:180см', url:'https://topplant.ru/komnatnyie-rasteniya/strelicziya/strelicziya-nikolaya-d24sm-h170sm', price:'26 000 ₽', img:'https://topplant.ru/assets/images/products/67/streliciya-27-165-1.jpg', more:['https://topplant.ru/assets/images/products/67/streliciya-27-165-2.jpg','https://topplant.ru/assets/images/products/67/streliciya-27-165-3.jpg'], specs:[['Высота по карточке','165 см'],['Диаметр горшка','27 см'],['Освещение','Яркий свет'],['Полив','Умеренный'],['Место произрастания','Южная Африка'],['Влажность','Повышенная']], desc:'Стрелиция Николая с крупными кожистыми листьями, напоминающими банановые. Экзотический солитер для просторной гостиной или холла; любит яркий рассеянный свет, умеренный полив и высокую влажность.'},
+      {group:'living', title:'Кодиеум Миссис Айстон разветвленный D:40см H:160см', url:'https://topplant.ru/komnatnyie-rasteniya/kodieum/kodieum-missis-ajston-kroton-razvetvlennyij-d40sm-h160sm', price:'34 500 ₽', img:'https://topplant.ru/assets/images/products/1919/kodieum-missis-ajston-40-160.jpg', more:[], specs:[['Высота','160 см'],['Диаметр горшка','40 см'],['Освещение','Яркий свет'],['Полив','Обильный'],['Место произрастания','Юго-Восточная Азия'],['Влажность','Повышенная']], desc:'Крупный разветвлённый кротон с пёстрой листвой — яркий цветовой акцент интерьера. Для сохранения окраски ему нужен яркий свет, тепло, высокая влажность и регулярное опрыскивание.'},
+      {group:'living', title:'Кротон Миссис Айстон разветвленный D:30см H:150см', url:'https://topplant.ru/komnatnyie-rasteniya/kodieum/missis-ajston-razvetvlennyij-d30sm-h150', price:'27 000 ₽', img:'https://topplant.ru/assets/images/products/4518/kroton-miss-aiston-30-150-1.jpg', more:['https://topplant.ru/assets/images/products/4518/kroton-miss-aiston-30-150-2.jpg','https://topplant.ru/assets/images/products/4518/kroton-miss-aiston-30-150-3.jpg'], specs:[['Высота','150 см'],['Диаметр горшка','30 см'],['Освещение','Яркий свет'],['Полив','Обильный'],['Место произрастания','Юго-Восточная Азия'],['Влажность','Повышенная']], desc:'Разветвлённый кротон Миссис Айстон с разноцветными узорчатыми листьями. На странице рекомендованы яркий свет, тепло, повышенная влажность, обильный полив и формирующая обрезка.'},
+      {group:'living', title:'Спатифиллум Себастьян D:24см H:110см в Lechuza Cubico Color 32', url:'https://topplant.ru/komnatnyie-rasteniya/spatifillum/sebastyan-d24-v-lechuza-cubico-color-32', price:'14 500 ₽', img:'https://topplant.ru/assets/images/products/4362/spati-sebas-lechuza-cubico-24-110-1.jpg', more:['https://topplant.ru/assets/images/products/4362/spati-sebas-lechuza-cubico-24-110-2.jpg','https://topplant.ru/assets/images/products/4362/spati-sebas-lechuza-cubico-24-110-3.jpg'], specs:[['Высота','110 см'],['Диаметр горшка','24 см'],['Освещение','Теневыносливые'],['Полив','Умеренный'],['Место произрастания','Центральная и Южная Америка'],['Влажность','Обычная']], desc:'Крупный спатифиллум с глянцевыми листьями и белыми соцветиями в кашпо Lechuza Cubico Color 32. Теневыносливый вариант для гостиной; любит влажную почву, рассеянный свет и регулярное опрыскивание.'},
+      {group:'living', title:'Драцена Фрагранс Голден Кост разветвленная D:31см H:170см', url:'https://topplant.ru/komnatnyie-rasteniya/draczena/draczena-frangras/golden-kost-razvd31', price:'32 000 ₽', img:'https://topplant.ru/assets/images/products/4599/dracena-golden-raz-31-170-1.jpg', more:['https://topplant.ru/assets/images/products/4599/dracena-golden-raz-31-170-2.jpg','https://topplant.ru/assets/images/products/4599/dracena-golden-raz-31-170-3.jpg'], specs:[['Высота','170 см'],['Диаметр горшка','31 см'],['Освещение','Яркий рассеянный свет'],['Полив','Умеренный'],['Место произрастания','Тропическая Африка'],['Влажность','Повышенная']], desc:'Разветвлённая драцена с ярко-жёлтыми листьями — неприхотливый тропический акцент. Очищает и увлажняет воздух; любит рассеянный свет, равномерный полив и комнатную температуру.'},
+      {group:'living', title:'Замиокулькас D:40см H:145см в Lechuza Cubico Color 40 мускат', url:'https://topplant.ru/komnatnyie-rasteniya/zamiokulkas/d40sm-h145sm-lechuza-cubico-color-40-muskat', price:'32 865 ₽', img:'https://topplant.ru/assets/images/products/4121/zamiakulkas-cubico-color40-5.jpg', more:['https://topplant.ru/assets/images/products/4121/zamiakulkas-cubico-color40-2.jpeg','https://topplant.ru/assets/images/products/4121/zamiakulkas-cubico-color40-6.jpg'], specs:[['Высота','145 см'],['Диаметр горшка','40 см'],['Освещение','Яркий рассеянный свет'],['Полив','Умеренный'],['Тип','Обычный'],['Кашпо','Lechuza Cubico Color 40, мускат']], desc:'Замиокулькас в кашпо Lechuza Cubico Color 40. Лаконичное крупное растение для современного интерьера; по карточке — умеренный полив, яркий рассеянный свет и отсутствие необходимости в опрыскивании.'},
+      {group:'living', title:'Драцена Фрагранс Компакта разветвленная D:27см H:100см', url:'https://topplant.ru/komnatnyie-rasteniya/draczena/draczena-frangras/draczena-fragrans-kompakta-razvetvlennaya-d27sm-h100sm', price:'21 060 ₽', img:'https://topplant.ru/assets/images/products/143/dracaena-compacta-27-100.jpg', more:['https://topplant.ru/assets/images/products/143/dracaena-fragrans-compacta-branch-27-100-red-800x800.jpg'], specs:[['Высота','100 см'],['Диаметр горшка','27 см'],['Освещение','Яркий рассеянный свет'],['Полив','Умеренный'],['Место произрастания','Тропическая Африка'],['Влажность','Повышенная']], desc:'Компактная разветвлённая драцена — сочетание декоративности и пользы для квартиры, дома или офиса. Неприхотлива: яркий рассеянный свет, умеренный полив и периодическое опрыскивание.'},
+      {group:'kitchen', title:'Фикус Микрокарпа гинсенг D:35см H:130см', url:'https://topplant.ru/komnatnyie-rasteniya/bonsaj/mikrokarpa-ginseng-d35cm-h130cm', price:'32 000 ₽', img:'https://topplant.ru/assets/images/products/4279/ficus-miro-gins-35-130-1.jpg', more:['https://topplant.ru/assets/images/products/4279/ficus-miro-gins-35-130-2.jpg','https://topplant.ru/assets/images/products/4279/ficus-miro-gins-35-130-5.jpg'], specs:[['Высота','130 см'],['Диаметр горшка','35 см'],['Освещение','Яркий свет'],['Полив','Умеренный'],['Форма','Гинсенг / бонсай'],['Место произрастания','Селекционный гибрид']], desc:'Фикус Микрокарпа гинсенг с толстым стволом, густой кроной и мелкими тёмно-зелёными листьями. Выразительный центр композиции для кухни-гостиной; любит яркий свет, умеренный полив и влажный воздух.'},
+      {group:'kitchen', title:'Фикус Микрокарпа гинсенг (Бонсай) D:35см H:130см', url:'https://topplant.ru/komnatnyie-rasteniya/bonsaj/fikus-mikrokarpa-ginseng-bonsaj-d35cm-h130cm', price:'28 976,4 ₽', img:'https://topplant.ru/assets/images/products/2381/fikus-mikrokarpa-ginseng-35-120.jpg', more:[], specs:[['Высота','130 см'],['Диаметр горшка','35 см'],['Освещение','Яркий свет'],['Полив','Умеренный'],['Форма','Бонсай'],['Место произрастания','Селекционный гибрид']], desc:'Фикус-гинсенг в форме бонсай с массивным стволом и густой кроной. На странице отмечены очищение воздуха, яркое рассеянное освещение, умеренный полив, влажность и периодическая обрезка.'},
+      {group:'kitchen', title:'Лавр благородный (штамбовой) D:30см H:170см', url:'https://topplant.ru/komnatnyie-rasteniya/lavr/lavr-blagorodnyij-shtambovoj-d30sm-h170sm', price:'39 000 ₽', img:'https://topplant.ru/assets/images/products/62/lavr-blagorodnyij-shtambovoj-diametr-30sm-vyisota-170sm.jpg', more:[], specs:[['Высота','170 см'],['Диаметр горшка','30 см'],['Освещение','Яркий свет'],['Полив','Умеренный'],['Место произрастания','Средиземноморье'],['Форма','Штамбовая']], desc:'Вечнозелёный лавр с ароматными листьями, густой кроной и возможностью формировки. Подходит для кухни-гостиной: листья используются в кулинарии; любит яркий свет, умеренный полив и прохладную зимовку.'},
+      {group:'kitchen', title:'Фикус Микрокарпа Моклэйм штамб D:31см H:120см', url:'https://topplant.ru/komnatnyie-rasteniya/bonsaj/fikus-mikrokarpa-moklejm-shtamb-d31cm-h120cm', price:'21 341,7 ₽', img:'https://topplant.ru/assets/images/products/1532/fikus-mikrokarpa-moklejm-shtamb-(bonsaj)-31-120-2.jpg', more:[], specs:[['Высота','120 см'],['Диаметр горшка','31 см'],['Освещение','Яркий свет'],['Полив','Умеренный'],['Форма','Штамб / бонсай'],['Место произрастания','Селекционный гибрид']], desc:'Фикус Микрокарпа Моклэйм — миниатюрное деревце с толстым стволом и густой кроной. Хорошо смотрится как отдельный акцент; предпочитает яркий рассеянный свет, умеренный полив и влажный воздух.'}
+    ];
+
+    const esc = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const labels = {
+      zone: {living:'Гостиная', kitchen:'Кухня-гостиная'},
+      form: {ball:'Шарики / штамбы', bush:'Кусты'},
+      type: {radermachera:'Радермахера', ficus:'Фикусы', schefflera:'Шеффлеры', croton:'Кротон / кодиеум', strelitzia:'Стрелиция', spathiphyllum:'Спатифиллум', dracaena:'Драцена', zamioculcas:'Замиокулькас', laurel:'Лавр'}
+    };
+    function classifyType(item) {
+      const t = item.title.toLowerCase();
+      if (t.includes('радермах')) return 'radermachera';
+      if (t.includes('фикус')) return 'ficus';
+      if (t.includes('шеффлер')) return 'schefflera';
+      if (t.includes('кротон') || t.includes('кодиеум')) return 'croton';
+      if (t.includes('стрелиц')) return 'strelitzia';
+      if (t.includes('спатифилл')) return 'spathiphyllum';
+      if (t.includes('драцен')) return 'dracaena';
+      if (t.includes('замиокулькас')) return 'zamioculcas';
+      if (t.includes('лавр')) return 'laurel';
+      return 'other';
+    }
+    function classifyForm(item, index) {
+      if (item.group === 'living') return index < 10 ? 'ball' : 'bush';
+      // В кухне-гостиной гинсенг без пометки «бонсай» оставлен в кустовой форме,
+      // остальные позиции — в группе шариков/штамбов.
+      return item.title.includes('гинсенг D:35') && !item.title.includes('Бонсай') ? 'bush' : 'ball';
+    }
+    items.forEach((item, index) => {
+      item.zone = item.group;
+      item.type = classifyType(item);
+      item.form = classifyForm(item, index);
+    });
+    const activeFilters = {zone:new Set(), form:new Set(), type:new Set()};
+    function card(item, index) {
+      const photos = [item.img, ...(item.more||[])];
+      const thumbs = photos.map((src,i)=>`<button class="${i===0?'active':''}" type="button" aria-label="Фото ${i+1}" onclick="setPhoto(this,'${esc(src)}')"><img src="${esc(src)}" alt="${esc(item.title)} — фото ${i+1}" loading="lazy"></button>`).join('');
+      const specs = item.specs.map(([k,v])=>`<div class="spec"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
+      const tags = `<span class="tag">${esc(labels.form[item.form])}</span><span class="tag">${esc(labels.type[item.type] || item.type)}</span>`;
+      return `<article class="card" data-zone="${esc(item.zone)}" data-form="${esc(item.form)}" data-type="${esc(item.type)}" data-search="${esc((item.title+' '+item.desc+' '+labels.form[item.form]+' '+(labels.type[item.type]||'')).toLowerCase())}">
+        <div class="gallery"><img class="main" src="${esc(item.img)}" alt="${esc(item.title)}" loading="lazy"><div class="thumbs">${thumbs}</div></div>
+        <div class="card-body"><h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a></h3><div class="tags">${tags}</div><div class="price">${esc(item.price)}</div>
+          <div class="body-grid"><div class="description">${esc(item.desc)}</div><dl class="specs">${specs}</dl></div>
+          <a class="source" href="${esc(item.url)}" target="_blank" rel="noopener">Открыть карточку на TopPlant ↗</a>
+        </div></article>`;
+    }
+    function render() {
+      document.querySelector('#living-grid').innerHTML = items.filter(x=>x.group==='living').map(card).join('');
+      document.querySelector('#kitchen-grid').innerHTML = items.filter(x=>x.group==='kitchen').map(card).join('');
+    }
+    function setPhoto(button, src) { const gallery=button.closest('.gallery'); gallery.querySelector('.main').src=src; gallery.querySelectorAll('button').forEach(b=>b.classList.remove('active')); button.classList.add('active'); }
+    function syncFilterButtons() {
+      document.querySelectorAll('.filter-row').forEach(row => {
+        const group = row.dataset.filterRow;
+        const selected = activeFilters[group];
+        row.querySelectorAll('.filter-btn').forEach(btn => {
+          const val = btn.dataset.value;
+          btn.classList.toggle('active', val === 'all' ? selected.size === 0 : selected.has(val));
+        });
+      });
+    }
+    function applyFilters() {
+      const q = document.querySelector('#search').value.trim().toLowerCase();
+      let visible = 0;
+      document.querySelectorAll('.card').forEach(card => {
+        const matches = ['zone','form','type'].every(group => !activeFilters[group].size || activeFilters[group].has(card.dataset[group]));
+        const textMatches = !q || card.dataset.search.includes(q);
+        const show = matches && textMatches;
+        card.style.display = show ? 'flex' : 'none';
+        if (show) visible++;
+      });
+      document.querySelectorAll('section[id]').forEach(section => {
+        const any = Array.from(section.querySelectorAll('.card')).some(card => card.style.display !== 'none');
+        section.style.display = any ? '' : 'none';
+      });
+      document.querySelector('#empty').style.display = visible ? 'none' : 'block';
+      const active = Object.entries(activeFilters).flatMap(([group, values]) => [...values].map(value => labels[group][value])).filter(Boolean);
+      document.querySelector('#filter-status').textContent = `Показано ${visible} из ${items.length}${active.length ? ' · '+active.join(' · ') : ''}`;
+    }
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => {
+      const group = btn.dataset.filterGroup;
+      const value = btn.dataset.value;
+      if (value === 'all') activeFilters[group].clear();
+      else activeFilters[group].has(value) ? activeFilters[group].delete(value) : activeFilters[group].add(value);
+      syncFilterButtons();
+      applyFilters();
+    }));
+    document.querySelector('#reset-filters').addEventListener('click', () => {
+      Object.values(activeFilters).forEach(set => set.clear());
+      document.querySelector('#search').value = '';
+      syncFilterButtons();
+      applyFilters();
+    });
+    document.querySelector('#search').addEventListener('input', applyFilters);
+    render();
+    syncFilterButtons();
+    applyFilters();
+  </script>
+</body>
+</html>
